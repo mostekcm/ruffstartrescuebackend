@@ -8,6 +8,8 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
+var rest = require('./REST');
+
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,7 +29,9 @@ router.get('/', function(req, res) {
 // more routes for our API will happen here
 router.route('/events')
     .get(function(req, res) {
-        res.json({ events: [ { name: 'real event to go here...'}] });
+        rest.get('www.eventbriteapi.com','/v3/users/me/owned_events/',process.env.EVENTBRITE_KEY,{status:'live',order_by:'start_asc'},function(data) {
+            res.json(data);
+        });
     });
 
 // REGISTER OUR ROUTES -------------------------------
