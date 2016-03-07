@@ -31,8 +31,6 @@ module.exports = {
             headers: headers
         };
 
-        console.log(headers);
-
         var req = https.request(options, function (res) {
             res.setEncoding('utf-8');
 
@@ -43,7 +41,6 @@ module.exports = {
             });
 
             res.on('end', function () {
-                console.log(responseString);
                 var responseObject = JSON.parse(responseString);
                 success(responseObject);
             });

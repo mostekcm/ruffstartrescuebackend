@@ -7,6 +7,7 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
+var cors       = require('cors');
 
 var rest = require('./REST');
 
@@ -16,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;        // set our port
+
+// CONFIGURE CORS
+app.use(cors());
 
 // ROUTES FOR OUR API
 // =============================================================================
